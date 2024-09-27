@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, ValidationError
 
 from datetime import datetime
 from dotenv import load_dotenv
@@ -16,9 +16,16 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 moment = Moment(app)
 bootstrap = Bootstrap(app)
 
+def validate_at_symbol(form, field):
+    if '@' not in field.data:
+        raise ValidationError(f"Please include an '@' in the email address. '{field.data}' is missing an '@'.")
+    
 class NameForm(FlaskForm):
     name = StringField('What is your name?', validators=[DataRequired()])
-    email = StringField('What is your email?', validators=[DataRequired()])
+    email = StringField('What is your UofT Email address?', validators=[
+        DataRequired(), 
+        validate_at_symbol
+        ])
     submit = SubmitField('Submit')
 
 @app.route('/', methods=['GET', 'POST'])
