@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 app = Flask(__name__)
-bootstrap = Bootstrap(app)
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -17,3 +17,5 @@ def page_not_found(e):
 @app.errorhandler(500)
 def internal_server_error(e):
     return render_template('500.html'), 500
+
+bootstrap = Bootstrap(app)
