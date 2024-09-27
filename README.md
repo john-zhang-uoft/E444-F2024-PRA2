@@ -2,4 +2,4 @@
 
 John Zhang
 
-This repo is a clone of  https://github.com/miguelgrinberg/flasky.
+This is for PRA 2 of ECE444, learning Flask, Bootstrap, and Docker. This repo is a clone of  https://github.com/miguelgrinberg/flasky.
